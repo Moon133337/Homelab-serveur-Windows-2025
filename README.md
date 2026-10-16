@@ -18,6 +18,42 @@ L'objectif est de développer des compétences pratiques en administration syst�
 
 ## Architecture réseau
 
+```text
+                 LABORATOIRE WINDOWS SERVER 2025
+                 =================================
+
+                    ORACLE VIRTUALBOX
+                            |
+             +--------------+--------------+
+             |                             |
+     RESEAU NAT                     RESEAU INTERNE
+     Acces Internet                 192.168.2.0/24
+             |                             |
+       +-----+------+                +-----+------+
+       |            |                |            |
+   +--------+  +---------+       +--------+  +---------+
+   | SRV001 |  | Clients |       | SRV001 |  | Clients |
+   +--------+  +---------+       +--------+  +---------+
+   10.0.3.15    10.0.3.x         192.168.2.1 192.168.2.x
+       |                             |
+       |                       +------------------+
+       |                       | SERVICES SERVEUR |
+       |                       +------------------+
+       |                       | AD DS : domaine  |
+       |                       | DNS  : resolution|
+       |                       | DHCP : adresses  |
+       |                       | SMB  : partages  |
+       |                       | GPO  : politiques|
+       |                       +------------------+
+
+     Le NAT fournit l'acces Internet.
+     Le reseau interne permet aux VM de communiquer
+     avec le serveur et ses services.
+     
+     SRV001 possede deux interfaces reseau, mais
+     ne route pas le trafic entre les deux reseaux.
+```
+
 Le laboratoire utilise plusieurs interfaces réseau virtuelles afin de séparer les communications internes de l'accès au réseau externe.
 
 - **Réseau interne :** communication entre le serveur et les postes clients.
